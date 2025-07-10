@@ -1,192 +1,138 @@
-Library Automation System
-This project implements a small-scale, file-operation based Library Automation System focusing on the principles of relational databases. It is developed as a term project for the BLM1031 - Structural Programming course.
+📚 Library Automation System
+
+This project implements a small-scale, file-based Library Automation System inspired by relational database principles. It was developed as a term project for the BLM1031 - Structural Programming course at Yıldız Technical University.
+
+⸻
+
+📂 Table of Contents
+	•	Project Overview
+	•	Functional Requirements
+	•	Author Management
+	•	Student Management
+	•	Book Management
+	•	Book-Author Relationship Management
+	•	Student Book Lending/Returning
+	•	Program Menus
+	•	Student Operations
+	•	Book Operations
+	•	Author Operations
+	•	Coding Requirements
+	•	Project Reporting
+	•	Project Submission
+	•	Contact
+
+⸻
+
+📌 Project Overview
+
+The system is designed to manage authors, students, books, and their relationships in a library environment. It uses linked lists for data structures and CSV files for persistent storage.
+
+⸻
+
+🛠️ Functional Requirements
 
-Table of Contents
-Project Overview
+📖 Author Management
+	•	Add, delete, edit, and list authors.
+	•	Each author has a name, surname, and auto-incrementing authorID (1, 2, …, N).
+	•	Authors are stored in a singly linked list, sorted by ID, and saved in Yazarlar.csv.
 
-Functional Requirements
+👨‍🎓 Student Management
+	•	Add, delete, edit, and list students.
+	•	Each student has a name, surname, an initial score of 100, and a unique 8-digit student number.
+	•	Students are managed using a doubly linked list and saved in Ogrenciler.csv.
 
-Author Management
+📚 Book Management
+	•	Add, delete, edit, and list books.
+	•	Each book has a name, 13-digit ISBN, and quantity.
+	•	Each copy gets a unique tag like ISBN_1, ISBN_2, etc.
+	•	Stored using singly linked lists, including a sublist for book copies.
+	•	Lending status: either “RAFTA” or a student’s ID.
+	•	Data is stored in CSV format (e.g., Kitaplar.csv, KitapOrnekleri.csv).
 
-Student Management
+🔗 Book-Author Relationship Management
+	•	Handle many-to-many relationships: a book can have multiple authors, and an author can write multiple books.
+	•	Relationships are stored in KitapYazar.csv.
+	•	Data is loaded into a dynamic struct array during runtime.
 
-Book Management
+⚠️ If an author is deleted, their ID in KitapYazar.csv is replaced with -1.
+⚠️ Invalid authors or books are blocked with warnings.
 
-Book-Author Relationship Management
+🔄 Student Book Lending/Returning
+	•	Multiple books can be borrowed/returned by multiple students.
+	•	Lending records include: StudentID, BookTagNo, TransactionType (0: lend, 1: return), Date.
+	•	Data is stored in OduncIslemleri.csv.
 
-Student Book Lending/Returning
+⚠️ Lending is denied if the student’s score is negative.
+⚠️ Late returns (after 15 days) deduct 10 points.
+⚠️ If no copies are available, transaction fails.
 
-Program Menus
+⸻
 
-Student Operations
+📋 Program Menus
 
-Book Operations
+🧑‍🎓 Student Operations
+	•	Add/Delete/Update students
+	•	View student info by ID or name
+	•	List:
+	•	Students who haven’t returned books
+	•	Penalized students
+	•	All students
+	•	Borrow/Return books
 
-Author Operations
+📘 Book Operations
+	•	Add/Delete/Update books
+	•	View book details
+	•	List:
+	•	Books on shelf
+	•	Overdue books
+	•	Match or update book-author relationships
 
-Coding Requirements
+✍️ Author Operations
+	•	Add/Delete/Update authors
+	•	View author info and their books
 
-Project Reporting
+⸻
 
-Project Submission
+💡 Coding Requirements
+	•	Use function pointers to avoid repetition
+	•	All changes must update both memory and files
+	•	No global or static variables
+	•	Use dynamic memory allocation only
+	•	Define appropriate structs for each CSV format
+	•	All files must be in CSV format
 
-Contact
+⸻
 
-Project Overview
-The Library Automation System is designed to manage authors, students, books, and their relationships within a library environment. It utilizes file operations (specifically CSV files) and linked list data structures to store and manage information.
+📑 Project Reporting
 
-Functional Requirements
-The system provides the following core functionalities:
+Your ÖğrenciNo.pdf must include:
+	•	Functional test cases with screenshots or terminal outputs
+	•	Contents of all CSV files after execution
+	•	Explanation of your sources and what you learned
+	•	Proper structure (table of contents, contact info, etc.)
 
-Author Management
-Add/Delete/Edit/List Authors:
+⸻
 
-Each author has a name, surname, and an automatically incrementing authorID (1, 2, ..., N).
+📦 Project Submission
 
-Authors are stored in a Singly Linked List, sorted by authorID, and persisted in yazarlar.csv.
+Deadline: May 27, 2025 – 23:59
+Submission: via online.yildiz.edu.tr
 
-Information can be deleted or updated, with changes reflected in the CSV file.
+Submission Package (ÖğrenciNo.zip or .rar) must include:
+	•	ÖğrenciNo.pdf (report)
+	•	ÖğrenciNo.c (source code)
+	•	All .csv files from your tests
+	•	Video link (max 8 minutes, introduce yourself)
 
-Student Management
-Add/Delete/Edit/List Students:
+⚠️ Assignments will be scanned for plagiarism. Identical submissions will be graded 0.
 
-Each student has a name, surname, an initial library score of 100, and a unique 8-digit student number.
+⚠️ Late submissions will not be accepted. Keep a screenshot of your successful upload.
 
-Student information is stored in a struct within a Doubly Linked List and persisted in Ogrenciler.csv.
+⸻
 
-Information can be deleted or updated, with changes reflected in the CSV file.
+📬 Contact
 
-Book Management
-Add/Delete/Edit/List Books:
+For any project-related questions, contact your lab assistant before the deadline.
+They may request an online or in-person review afterward.
 
-Each book has a name, a 13-digit ISBN number, and a quantity.
-
-For multiple copies of a book, each copy receives a unique tag number (e.g., ISBN_1, ISBN_2, ..., ISBN_N).
-
-Books are stored in a Singly Linked List, sorted by name and then ISBN.
-
-For each book, a separate Singly Linked List is created to store information about its copies, including the tag number and lending status.
-
-The lending status indicates either "RAFTA" (on shelf) or the studentID of the borrowing student.
-
-The relationship between books and their copies is modeled using singly linked lists as shown in Figure 1 (from the project document).
-
-All book and copy data are stored consistently in CSV files.
-
-Book-Author Relationship Management
-Associate Books with Authors:
-
-Handles cases where a book has multiple authors and an author has written multiple books.
-
-BookISBN - AuthorID pairings are stored in KitapYazar.csv.
-
-Data from this file is loaded into a dynamic STRUCT ARRAY of size N (number of lines in the file) and kept in memory while the program is running.
-
-Note 1: If an author is deleted from the system, their authorID in KitapYazar.csv should be updated to -1.
-
-Note 2: Operations on unregistered authors or books should be prevented, and warnings should be issued to maintain data integrity.
-
-Student Book Lending/Returning
-Lend/Return Books:
-
-Manages consistent storage of lending and return information for multiple books by a student, and multiple students borrowing the same book at different times.
-
-A CSV file and a corresponding struct are designed to store StudentID, BookTagNo, TransactionType (0 for lending, 1 for returning), and Date information (as shown in Figure 3 from the project document).
-
-When a book is lent, its ShelfStatus in the book data structure and corresponding file (as explained in Book Management) must be updated from "RAFTA" to the StudentID.
-
-Note 1: Operations on unregistered students or books should be prevented, and warnings should be issued. If a student's library score becomes negative, the lending operation should be cancelled with a warning.
-
-Note 2: If a book is returned more than 15 days after being borrowed, the student receives a -10 penalty points, and their library score is updated accordingly.
-
-Note 3: If all copies of a book are already lent out, a "TRANSACTION FAILED" warning should be issued.
-
-Program Menus
-The application provides the following menu options:
-
-Student Operations
-Add, Delete, Update Student: Perform CRUD operations on student information, updating both files and linked lists.
-
-View Student Information: Display personal details (Name, Surname, ID, Score, etc.) and all book transaction history for a student, given their ID or Name-Surname.
-
-List Students Who Have Not Returned Books:
-
-List Penalized Students:
-
-List All Students:
-
-Borrow/Return Book:
-
-Book Operations
-Add, Delete, Update Book: Perform CRUD operations on book information, updating both files and linked lists.
-
-View Book Information: List all details for a given book name, including information about its individual copies.
-
-List Books on Shelf:
-
-List Books Not Returned on Time:
-
-Match Book-Author: Update the relevant file and struct array for book-author relationships.
-
-Update Book's Author: Update the relevant file and struct array for book-author relationships.
-
-Author Operations
-Add, Delete, Update Author: Perform CRUD operations on author information, updating both files and linked lists.
-
-View Author Information: Display author details and all books written by that author, given the author's name.
-
-Coding Requirements
-Design necessary functions for each menu option and operation.
-
-Utilize function pointers to avoid code repetition for similar logic.
-
-All add, delete, and update operations that modify data structures must also save changes to the corresponding files.
-
-Static and global variable usage is forbidden.
-
-All memory allocation must be performed using dynamic memory management functions.
-
-Define appropriate struct declarations for each object in the CSV files.
-
-All generated files must be in CSV format.
-
-Project Reporting
-Your report (ÖğrenciNo.pdf) should include:
-
-Sufficient test cases for each function, demonstrating correct functionality.
-
-Command-line output (user input and program output) from running your program.
-
-Contents of all data files after program execution.
-
-A section on sources used and what you gained from this project.
-
-Similar to previous Digital Analysis and Introduction to Structural Programming reports, include a table of contents, contact information, and all outputs.
-
-Project Submission
-Video: Create a short video (max 8 minutes) demonstrating your application's functionality. Upload it to a video sharing site. You can narrate details. Remember to introduce yourself visually at the beginning of the video.
-
-Report: Save your work, problem definition, screenshots of your solution, algorithm details, and the video link in a report named ÖğrenciNo.pdf.
-
-Submission Package: Submit a .RAR or .ZIP file named ÖğrenciNo.rar or ÖğrenciNo.zip containing:
-
-ÖğrenciNo.pdf (report file)
-
-ÖğrenciNo.c (source code)
-
-All .CSV files generated from test runs.
-
-Important Notes:
-
-All assignments will be checked for similarity. Assignments found to be similar will be graded as 0.
-
-Upload your project via online.yildiz.edu.tr by the deadline (May 27, 2025, 23:59). The system closes automatically; late submissions via email are not possible.
-
-Save a screenshot as proof of successful upload. Submissions sent by email without proof will not be accepted.
-
-Contact
-For questions during the project submission process, contact your lab group supervisor. The supervisor may contact you for in-person or online review after the submission deadline. Ensure your current email and phone number are included in your report.
-
-Email: enis.ogdum@std.yildiz.edu.tr
-
-Good luck!
+📧 Email: enis.ogdum@std.yildiz.edu.tr
